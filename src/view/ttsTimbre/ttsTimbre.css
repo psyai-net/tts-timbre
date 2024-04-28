@@ -1,0 +1,500 @@
+.technology {
+  background-color: #1d1d1f;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  
+}
+.technology .slide-bar {
+  height: 100px;
+}
+.technology .tech-nav {
+  height: calc(100% - 100px);
+  margin: 0 80px;
+  position: relative;
+}
+.technology .tech-nav .tech-item {
+  background-size: auto 100%;
+  width: calc(25% - 1px);
+  height: calc(100% - 120px);
+  float: left;
+  border: 1px solid #4a4a4c;
+  border-right: none;
+  background-color: #4a4a4c;
+  position: relative;
+  z-index: 10;
+  transition: all 0.5s;
+}
+.technology .tech-nav .tech-item:last-child {
+  position: absolute;
+  right: 0;
+  width: calc(25% - 2px);
+  border: 1px solid #4a4a4c;
+}
+.technology .tech-nav .tech-item .tech-mask {
+  position: absolute;
+  width: calc(100% + 2px);
+  height: 100%;
+  left: -1px;
+  top: 0;
+  background: rgba(35, 29, 42, 0.6);
+}
+.technology .tech-nav .tech-item .mask {
+  position: absolute;
+  width: calc(100% + 2px);
+  height: 64%;
+  bottom: 0;
+  left: -1px;
+  z-index: 10;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+}
+.technology .tech-nav .tech-item .tech-item-nearby {
+  /* width: calc(17% - 2px); */
+}
+.technology .tech-nav .tech-item .tech-name {
+  position: absolute;
+  top: 70.8%;
+  left: 6.8%;
+  font-size: 50px;
+  letter-spacing: 0.2em;
+  background: linear-gradient(90deg, rgba(251, 251, 253, 0) -15.91%, #fbfbfd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0px 4px 24px rgba(29, 29, 31, 0.1);
+}
+.technology .tech-nav .tech-item .title-position {
+  /* position: absolute;
+  left: 4.5%;
+  bottom: 40.8%;
+  z-index: 10; */
+  width: 100%;
+  height: 100%;
+}
+.technology .tech-nav .tech-item .title-position .tech-title {
+  font-family: "PingFang SC";
+  font-style: normal;
+  font-weight: 400;
+  word-break: break-all;
+  text-align: left;
+  font-size: 50px;
+  line-height: 80px;
+  letter-spacing: 0.2em;
+  color: #fbfbfd;
+  text-shadow: 0px 4px 24px rgba(29, 29, 31, 0.1);
+}
+.technology .tech-nav .tech-item .tech-content {
+  z-index: 10;
+  font-family: "PingFang SC";
+  font-style: normal;
+  position: absolute;
+  left: 4.5%;
+  bottom: 19.4%;
+  padding-right: 4%;
+  font-weight: 300;
+  word-break: break-word;
+  text-align: left;
+  font-size: 14px;
+  line-height: 36px;
+  color: #fbfbfd;
+}
+.technology .tech-nav .tech-item .tech-button {
+  z-index: 10;
+  width: 160px;
+  height: 48px;
+  position: absolute;
+  border: 1px solid rgba(251, 251, 253, 0.8);
+  border-radius: 12px;
+  left: 4.5%;
+  bottom: 8.7%;
+  font-family: "PingFang SC";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 48px;
+  text-align: center;
+  letter-spacing: 0.2em;
+  color: rgba(251, 251, 253, 0.8);
+  cursor: pointer;
+}
+.technology .tech-nav .tech-item .tech-button:hover {
+  background: rgba(251, 251, 253, 0.1);
+  color: rgba(251, 251, 253);
+}
+.technology .tech-nav .tech-item-active {
+  width: calc(33% - 2px) !important;
+  transition: all 0.5s;
+}
+.technology .tech-nav .tech-item-nearby {
+  width: calc(17% - 1px) !important;
+  transition: all 0.5s;
+}
+.technology .tech-body {
+  position: relative;
+  overflow-x: hidden;
+}
+.technology .tech-body .realistic {
+  position: relative;
+  height: 1078px;
+  background: black url(@/assets/technology/back-detail-realistic.png) left center no-repeat;
+  background-size: auto 100%;
+}
+.technology .tech-body .realistic .realistic-content {
+  position: absolute;
+  padding-right: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.technology .tech-body .realistic .realistic-content .realistic-title {
+  font-family: "PingFang SC";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 66px;
+  line-height: 80px;
+  text-align: right;
+  letter-spacing: 0.1em;
+  background: linear-gradient(90deg, #77382c 60%, #fbece9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0px 4px 24px rgba(29, 29, 31, 0.1);
+  padding-top: 500px;
+}
+.technology .tech-body .realistic .realistic-content .realistic-intro {
+  width: 1489px;
+  height: 160px;
+  font-family: "PingFang SC";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 40px;
+  text-align: right;
+  color: #ffffff;
+  opacity: 0.5;
+  margin-top: 71px;
+  position: relative;
+}
+.technology .tech-body .realistic .realistic-content .realistic-intro .realistic-intro-item {
+  position: absolute;
+  right: 0;
+  text-align: right;
+  width: 800px;
+}
+.technology .tech-body .drive {
+  position: relative;
+  height: 985px;
+  width: 100%;
+  background: white url(@/assets/technology/back-detail-drive.png) left top no-repeat;
+  background-size: 100% auto;
+}
+.technology .tech-body .drive .drive-content {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0 80px;
+}
+.technology .tech-body .drive .drive-content .drive-icon {
+  width: 100px;
+  height: 100px;
+  padding-top: 165px;
+  display: block;
+}
+.technology .tech-body .drive .drive-content .drive-title {
+  width: 380px;
+  height: 100px;
+  font-family: "PingFang SC";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 66px;
+  line-height: 100px;
+  letter-spacing: -0.05em;
+  color: #1d1d20;
+  margin-top: 158px;
+}
+.technology .tech-body .drive .drive-content .drive-border {
+  width: 118px;
+  height: 0px;
+  border-bottom: 1px solid #1d1d20;
+  margin-top: 21px;
+}
+.technology .tech-body .drive .drive-content .drive-intro {
+  width: 741px;
+  height: 71px;
+  font-family: "PingFang SC";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 40px;
+  text-align: left;
+  color: #1d1d20;
+  opacity: 0.5;
+  margin-top: 25px;
+}
+.technology .tech-body .drive .drive-content .drive-item-group {
+  display: flex;
+  margin-top: 189px;
+}
+.technology .tech-body .drive .drive-content .drive-item-group .drive-item {
+  display: flex;
+}
+.technology .tech-body .drive .drive-content .drive-item-group .drive-item:nth-child(1) .drive-item-intro {
+  margin-right: 170px;
+}
+@media screen and (min-width: 1680px) {
+  .technology .tech-body .drive .drive-content .drive-item-group .drive-item:nth-child(1) .drive-item-intro {
+    margin-right: 170px;
+  }
+}
+@media screen and (max-width: 1680px) {
+  .technology .tech-body .drive .drive-content .drive-item-group .drive-item:nth-child(1) .drive-item-intro {
+    margin-right: 130px;
+  }
+}
+.technology .tech-body .drive .drive-content .drive-item-group .drive-item:nth-child(2) .drive-item-intro {
+  width: 168px;
+  margin-right: 184px;
+}
+@media screen and (min-width: 1680px) {
+  .technology .tech-body .drive .drive-content .drive-item-group .drive-item:nth-child(2) .drive-item-intro {
+    margin-right: 184px;
+  }
+}
+@media screen and (max-width: 1680px) {
+  .technology .tech-body .drive .drive-content .drive-item-group .drive-item:nth-child(2) .drive-item-intro {
+    margin-right: 120px;
+  }
+}
+.technology .tech-body .drive .drive-content .drive-item-group .drive-item:nth-child(3) .drive-item-intro {
+  width: 210px;
+  margin-right: 131px;
+}
+@media screen and (min-width: 1680px) {
+  .technology .tech-body .drive .drive-content .drive-item-group .drive-item:nth-child(3) .drive-item-intro {
+    margin-right: 131px;
+  }
+}
+@media screen and (max-width: 1680px) {
+  .technology .tech-body .drive .drive-content .drive-item-group .drive-item:nth-child(3) .drive-item-intro {
+    margin-right: 80px;
+  }
+}
+.technology .tech-body .drive .drive-content .drive-item-group .drive-item .drive-number {
+  width: 60px;
+  height: 80px;
+}
+.technology .tech-body .drive .drive-content .drive-item-group .drive-item .drive-item-intro {
+  width: 154px;
+  height: 60px;
+  font-family: "PingFang SC";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: #1d1d20;
+  opacity: 0.5;
+  text-align: left;
+  padding-top: 20px;
+}
+.technology .tech-body .modeling {
+  position: relative;
+  height: 985px;
+  width: 100%;
+  background: black url(@/assets/technology/back-detail-3d.png) left center no-repeat;
+  background-size: auto 100%;
+}
+.technology .tech-body .modeling .modeling-content {
+  position: absolute;
+  right: 80px;
+}
+.technology .tech-body .modeling .modeling-content .modeling-title {
+  width: 741px;
+  height: 100px;
+  font-family: "PingFang SC";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 66px;
+  line-height: 100px;
+  text-align: right;
+  letter-spacing: -0.05em;
+  color: #fafafa;
+  margin-top: 384px;
+}
+.technology .tech-body .modeling .modeling-content .modeling-intro {
+  width: 741px;
+  height: 71px;
+  font-family: "PingFang SC";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 40px;
+  text-align: right;
+  color: #fafafa;
+  opacity: 0.5;
+  margin-top: 46px;
+}
+.technology .tech-body .cloud {
+  position: relative;
+  height: 977px;
+  width: 100%;
+  background: #ffffff;
+  background-size: auto 100%;
+}
+.technology .tech-body .cloud .cloud-content {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0 80px;
+}
+.technology .tech-body .cloud .cloud-content .cloud-title {
+  width: 100%;
+  height: 100px;
+  font-family: "PingFang SC";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 66px;
+  line-height: 100px;
+  text-align: center;
+  letter-spacing: -0.05em;
+  color: #1d1d20;
+  margin: 83px 0 9px 0;
+}
+.technology .tech-body .cloud .cloud-content .cloud-intro {
+  width: 100%;
+  height: 40px;
+  font-family: "PingFang SC";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 40px;
+  color: #1d1d20;
+  opacity: 0.5;
+  margin-bottom: 44px;
+}
+.technology .tech-body .cloud .cloud-content .cloud-item-group {
+  display: flex;
+}
+.technology .tech-body .cloud .cloud-content .cloud-item-group .cloud-item {
+  width: 354px;
+  height: 618px;
+  margin-right: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.technology .tech-body .cloud .cloud-content .cloud-item-group .cloud-item .cloud-item-title {
+  width: 130px;
+  height: 24px;
+  font-family: "PingFang SC";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  color: #fbfbfd;
+  margin-top: 3px;
+  margin-bottom: 54.88px;
+}
+.technology .tech-body .cloud .cloud-content .cloud-item-group .cloud-item .cloud-item-border {
+  width: 220px;
+  height: 0px;
+  opacity: 0.8;
+  border-bottom: 1px solid #ffffff;
+  margin-bottom: 47px;
+}
+.technology .tech-body .cloud .cloud-content .cloud-item-group .cloud-item .cloud-item-intro {
+  width: 280px;
+  height: 48px;
+  font-family: "PingFang SC";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  color: #fbfbfd;
+  margin-bottom: 89px;
+}
+.technology .tech-body .cloud .cloud-content .cloud-item-group .cloud-item:last-child {
+  margin: 0;
+}
+.technology .tech-body .cloud .cloud-content .cloud-item-group .cloud-item:nth-child(1) {
+  background: url(@/assets/technology/back-cloud-browser.png) center no-repeat;
+  background-size: 100% 100%;
+}
+.technology .tech-body .cloud .cloud-content .cloud-item-group .cloud-item:nth-child(1) img {
+  width: 105.71px;
+  height: 110.06px;
+  margin-top: 65.06px;
+}
+.technology .tech-body .cloud .cloud-content .cloud-item-group .cloud-item:nth-child(2) {
+  background: url(@/assets/technology/back-cloud-webrtc.png) center no-repeat;
+  background-size: 100% 100%;
+}
+.technology .tech-body .cloud .cloud-content .cloud-item-group .cloud-item:nth-child(2) img {
+  width: 79.66px;
+  height: 89.31px;
+  margin-top: 73.11px;
+  margin-bottom: 10px;
+}
+.technology .tech-body .cloud .cloud-content .cloud-item-group .cloud-item:nth-child(3) {
+  background: url(@/assets/technology/back-cloud-gpu.png) center no-repeat;
+  background-size: 100% 100%;
+}
+.technology .tech-body .cloud .cloud-content .cloud-item-group .cloud-item:nth-child(3) img {
+  width: 110px;
+  height: 110px;
+  margin-top: 61px;
+}
+.technology .tech-body .cloud .cloud-content .cloud-item-group .cloud-item:nth-child(4) {
+  background: url(@/assets/technology/back-cloud-serverless.png) center no-repeat;
+  background-size: 100% 100%;
+}
+.technology .tech-body .cloud .cloud-content .cloud-item-group .cloud-item:nth-child(4) img {
+  width: 81px;
+  height: 81px;
+  margin-top: 79px;
+  margin-bottom: 10px;
+}
+.technology .tech-body .cloud .cloud-content .cloud-item-group .cloud-item .cloud-item-tags {
+  width: calc(100% - 52px);
+  display: flex;
+  padding: 0 26px;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+.technology .tech-body .cloud .cloud-content .cloud-item-group .cloud-item .cloud-item-tags .cloud-item-tag {
+  padding: 0 14px;
+  height: 34px;
+  background: linear-gradient(131.56deg, rgba(255, 138, 1, 0.89) 28.07%, rgba(255, 138, 1, 0.36) 74.2%);
+  backdrop-filter: blur(4px);
+  border-radius: 89px;
+  font-family: "PingFang SC";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 34px;
+  text-align: center;
+  color: #ffffff;
+  opacity: 0.5;
+  margin-right: 12px;
+}
+.technology .tech-body .cloud .cloud-content .cloud-item-group .cloud-item .cloud-item-tags .cloud-item-tag:nth-child(3) {
+  margin: 0;
+}
+.technology .tech-body .cloud .cloud-content .cloud-item-group .cloud-item .cloud-item-tags .cloud-item-tag-special {
+  padding: 0 8px 0 7px;
+}
+.fade2-enter-active,
+.fade2-leave-active {
+  position: relative;
+  margin-top: 30px;
+  opacity: 0;
+  transition: all 2s;
+}
+.fade2-enter-to {
+  margin-top: 0px;
+  opacity: 1;
+}
+.fade2-leave-to {
+  margin-top: 0px;
+  opacity: 1;
+}
