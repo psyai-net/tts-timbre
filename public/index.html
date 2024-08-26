@@ -64,6 +64,8 @@
     // let psyaiSpeakSpeed = ''
     // let psyaiLangValue = ''
     let virtualmanGender = '';
+    let virtualmanId = '';
+    let authToken = '';
 
 
     psyaiSaveFun = (obj) => {
@@ -93,6 +95,8 @@
         psyaiSpeakSpeed = parameterObj.speakSpeed?parameterObj.speakSpeed:'';
 
         virtualmanGender = parameterObj.virtualmanGender;
+        virtualmanId=parameterObj.vmId;
+        authToken=parameterObj.authToken;
     }
 
 
@@ -108,7 +112,9 @@
             voiceId:"64d1a565477c804c832ddd47", //可能为空
             speakSpeed:'2.0',
             virtualmanKey:'49367d508e6b48e59db35c61992419a3',
-            virtualmanGender:'male'
+            virtualmanGender:'male',
+            vmId:"10859",
+            authToken:"Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IndlYmFwcCIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiMzE4NGQ5NDY0YmU1NDIwMDdmOTMiXSwiZXhwIjoxNzI0OTAxOTEyLCJpYXQiOjE3MjQyOTcxMTIsImlkIjoiYjZkOWZiNTAtZDNjZS00OWJlLTg3NTgtN2IxNWQ0ZTI5ZWI4IiwiaXNBZG1pbiI6ZmFsc2UsImlzcyI6Imh0dHBzOi8vYXV0aC10ZXN0LnBzeWFpLm5ldCIsImp0aSI6ImFkbWluL2FjYjFmMDE0LTQxZjMtNDAwOS05ZjYzLTUyMDk2OTI4NTI5NCIsIm5hbWUiOiJiNmQ5ZmI1MC1kM2NlLTQ5YmUtODc1OC03YjE1ZDRlMjllYjgiLCJuYmYiOjE3MjQyOTcxMTIsIm5vbmNlIjoiIiwib3duZXIiOiJwc3lhaSIsInNjb3BlIjoiIiwic3ViIjoiYjZkOWZiNTAtZDNjZS00OWJlLTg3NTgtN2IxNWQ0ZTI5ZWI4IiwidGFnIjoiIiwidG9rZW5UeXBlIjoiYWNjZXNzLXRva2VuIn0.K5_e2cnI7vtw0nQnUz2hmGadNhBWc3aEVsE5L8kE7WKUBiTLg5qdqNuZ_9RJq3HXyyPsbCp5OIcMG3jU3KzV-bDKbMAuPaHWdsjWIB4izlCJrbOl_3yTDmul5kZEq6XlWoJipOywPft8vkYVL57WRUvLnYILNBhvK_dYKlB2hXweBddCnP7Loa9GuUYKuHLnCU1a8RTR1GGpITQcIyZYzZ3m3jYCrKu3hUZ5VxskKbFEVhmV9UrYKL0Q0hGUwa8g9Mrg9xDQ9lgwUnyt39rXFZIW44zUG1g1sq77Qmt64zA2R_VPobr42wxymEjeKUTb-6XHsvWzcDWFJnbGj7sI457CueeWRqbX1RSvaBUz0GZTcWsJvw6m8-2Zg32BF9lm3FmDYsZPiXnkCsemG1GJ5XJrgwk38_lYhL1lu24-LuF58nntmkl5lIxo8Hy_5wJtVM9g6I05wG40L0fFNzsP1WGaV9XezImUZEafzrExJvm2vn-aDKbhIC_jaoIkRGUNglgoUDX7v5iL-nsL3QUmk1M5k_qp8zd9RNiCDyw6UDQ3qTveOcK5oXhBNGfbEZ-f2Cn_Mzo3OBF1boKHWARIK1CUIr_EDkoT-zv9UO8PCnuka_hNBCSy8GPARgbzWosT1-eyKQnBLKs5x764csfpK7V5d_KGE71L0k96F8_BRNo"
         }))
         ue.interface.initData();
     },1000)

@@ -13,7 +13,7 @@ async function timbreEnum(form) {
         headers: {
             "Content-Type": "application/json",
             'token':  psyaiEditorToken,
-            'uid':  psyaiEditorUid
+            'uid':  psyaiEditorUid 
         },
     }))
 }
@@ -26,7 +26,7 @@ async function getList(form,obj) {
             headers: {
                 "Content-Type": "application/json",
                 'token':  psyaiEditorToken,
-                'uid':  psyaiEditorUid
+                'uid':  psyaiEditorUid 
             },
         }))
 }
