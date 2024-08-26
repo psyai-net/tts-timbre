@@ -98,19 +98,19 @@
 
     //方式调用示例，之后可删除
 
-    // setTimeout(()=>{
-    //     ue.interface.setParameters(JSON.stringify({
-    //         baseUrl:'https://dev.api.psyai.net',
-    //         token:'70aeee9d694ab251f3a579f4d01f61d911ac2ae1',
-    //         uid:'6492761184d0ff378d61b80d',
-    //         title:'声音tts',
-    //         langValue:'zh-CN',  //当选择为全部时为空
-    //         voiceId:"64d1a565477c804c832ddd47", //可能为空
-    //         speakSpeed:'2.0',
-    //         virtualmanKey:'49367d508e6b48e59db35c61992419a3',
-    //         virtualmanGender:'male'
-    //     }))
-    //     ue.interface.initData();
-    // },1000)
+    setTimeout(()=>{
+        ue.interface.setParameters(JSON.stringify({
+            baseUrl:'https://dev.api.psyai.net',
+            token:'70aeee9d694ab251f3a579f4d01f61d911ac2ae1',
+            uid:'6492761184d0ff378d61b80d',
+            title:'声音tts',
+            langValue:'zh-CN',  //当选择为全部时为空
+            voiceId:"64d1a565477c804c832ddd47", //可能为空
+            speakSpeed:'2.0',
+            virtualmanKey:'49367d508e6b48e59db35c61992419a3',
+            virtualmanGender:'male'
+        }))
+        ue.interface.initData();
+    },1000)
 </script>
 </html>
