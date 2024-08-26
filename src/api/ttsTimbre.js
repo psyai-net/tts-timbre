@@ -7,13 +7,26 @@ function getSessions(key) {
     return JSON.parse(sessionStorage.getItem(key))
 }
 
+// async function timbreEnum(form) {
+//     return checkResult(await axios.get(psyaiEditorUrl+'inner/joint/assets/tts/timbre/enum'+form,
+//     {
+//         headers: {
+//             "Content-Type": "application/json",
+//             'token':  psyaiEditorToken,
+//             'uid':  psyaiEditorUid 
+//         },
+//     }))
+// }
+
 async function timbreEnum(form) {
-    return checkResult(await axios.get(psyaiEditorUrl+'inner/joint/assets/tts/timbre/enum'+form,
+    let url = newPsyaiEditorUrl+'audio/timbre/enum'+'?classify=zh-CN';
+    console.log(url);
+    return checkResult(await axios.get(url,
     {
+        withCredentials: false,
         headers: {
             "Content-Type": "application/json",
-            'token':  psyaiEditorToken,
-            'uid':  psyaiEditorUid 
+            'Authorization':  authToken
         },
     }))
 }
