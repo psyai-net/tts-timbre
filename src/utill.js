@@ -54,9 +54,30 @@ function checkResult(request) {
     return data
 }
 
+function newCheckResult(request) {
+    const {
+        data,
+        code
+    } = request
+    if (code !== 0 && errorCode[code]) {
+        return {
+            ...errorCode[code],
+            code
+        }
+    } else if (code !== 0 && !errorCode[code]) {
+        return {
+            code,
+            msg: '系统错误，请稍后再试',
+            type: 'systemError'
+        }
+    }
+    return data
+}
+
 export {
     sleep,
     debounce,
     throttle,
-    checkResult
+    checkResult,
+    newCheckResult
 }

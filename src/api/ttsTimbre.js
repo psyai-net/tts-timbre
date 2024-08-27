@@ -1,6 +1,7 @@
 import axios from '@/axios';
 import {
-    checkResult
+    checkResult,
+    newCheckResult
 } from '@/utill.js'
 
 function getSessions(key) {
@@ -19,9 +20,9 @@ function getSessions(key) {
 // }
 
 async function timbreEnum(form) {
-    let url = newPsyaiEditorUrl+'audio/timbre/enum'+'?classify=zh-CN';
+    let url = newPsyaiEditorUrl+'audio/timbre/enum'+'?classify=tts_country';
     console.log(url);
-    return checkResult(await axios.get(url,
+    return newCheckResult(await axios.get(url,
     {
         withCredentials: false,
         headers: {
@@ -30,6 +31,22 @@ async function timbreEnum(form) {
         },
     }))
 }
+
+// async function getList(form,obj) {
+//     let url = newPsyaiEditorUrl+'/audio/timbre/list'+'?assetId=10859&page=1&pageSize=50';
+//     console.log(url);
+//     return newCheckResult(await axios.post(url,{
+//             ...obj
+//         },
+//         {
+//             withCredentials: false,
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 'token':  psyaiEditorToken,
+//                 'uid':  psyaiEditorUid 
+//             },
+//         }))
+// }
 
 async function getList(form,obj) {
     return checkResult(await axios.post(psyaiEditorUrl+'inner/joint/assets/tts/timbre/all_list'+form,{
@@ -45,7 +62,9 @@ async function getList(form,obj) {
 }
 
 async function getListCollect(form) {
-    return checkResult(await axios.get(psyaiEditorUrl+'inner/joint/assets/tts/timbre/collect/list'+form,
+    let url = psyaiEditorUrl+'inner/joint/assets/tts/timbre/collect/list'+form;
+    console.log(url);
+    return checkResult(await axios.get(url,
         {
             headers: {
                 "Content-Type": "application/json",

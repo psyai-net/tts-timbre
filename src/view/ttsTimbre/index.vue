@@ -649,6 +649,41 @@ async function getListData(form,obj) {
   }
   stopAudio()
 }
+// async function getListData(form,obj) {
+//   getSigFun()
+//   const data= await getList(form,obj)
+//   // console.log(data);
+//   listData.splice(0, listData.length, ...data);
+//   listData.forEach(obj => {
+//     if(obj.labels){
+//       var labels = obj.labels.split(',');
+//       var labelsText = labels.map(label => {
+//         var match = optionsApply.value.find(item => item.value === label);
+//         return match ? match.desc : '';
+//       });
+//       obj.labelsText = labelsText;
+//     }
+//   });
+
+//   if(callShow.value){
+//     selectedOptionSpeed.desc=psyaiSpeakSpeed
+//     var CallBackObj=listData.filter(d=>{return d.id==psyaiVoiceID})
+//     var dataIndex=listData.findIndex(d=>{return d.id==psyaiVoiceID})
+//     // console.log(CallBackObj,psyaiVoiceID,dataIndex,34)
+
+//     if(CallBackObj){
+//       saveDataObj.LangID=CallBackObj.length>0&&CallBackObj[0].dialect;
+//       saveDataObj.VoiceID=CallBackObj.length>0&&CallBackObj[0].speaker_name;
+//       saveDataObj.LangDesc=document.querySelector('.selected span').innerHTML;
+//       saveDataObj.DisplayName=CallBackObj.length>0&&CallBackObj[0].name;
+//       saveDataObj.SpeakerID=CallBackObj.length>0&&CallBackObj[0].id;
+//       saveDataObj.SpeakSpeed= selectedOptionSpeed.desc;
+//       listIndex.value=dataIndex;
+//     }
+//     callShow.value=false;
+//   }
+//   stopAudio()
+// }
 
 async function getListCollectData(obj) {
   getSigFun()
