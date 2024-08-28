@@ -21,7 +21,7 @@
               </div>
               <div class="sound-content">
                 <img :src="options.value.filter((selectD)=>selectD.value==item.dialect)[0].img">
-                <span>{{item.name}}</span>
+                <span>{{item.desc}}</span>
               </div>
               <div class="sound-type" :style="listIndex==index+1000 ? 'display: flex' : 'display: none'">
                 <div class="sound-type-btn">
@@ -94,7 +94,7 @@
                   </div>
                   <div class="sound-content">
                     <img v-if="options.value.filter((selectD)=>selectD.value==item.dialect).length > 0" :src="options.value.filter((selectD)=>selectD.value==item.dialect)[0].img">
-                    <span>{{item.name}}</span>
+                    <span>{{item.desc}}</span>
                   </div>
                   <div class="sound-type" :style="listIndex==index ? 'display: flex' : 'display: none'">
                     <div class="sound-type-btn">
@@ -281,7 +281,7 @@ function clickList(num,item){
   saveDataObj.LangID=item.dialect;
   saveDataObj.VoiceID=item.speaker_name;
   saveDataObj.LangDesc=document.querySelector('.selected span').innerHTML;
-  saveDataObj.DisplayName=item.name;
+  saveDataObj.DisplayName=item.desc;
   saveDataObj.SpeakerID=item.id;
   listIndex.value=num;
 }
@@ -549,23 +549,11 @@ async function auditionClick(item){
   //试听接口
   loaderShow.value=true;
   getSigFun()
-  const data= await aditionCreate({
-    data:{
-      text:`<speak version=\"1.0\" xmlns=\"http://www.w3.org/2001/10/synthesis\" xmlns:mstts=\"https://www.w3.org/2001/mstts\" xml:lang=\"${item.dialect}\"><voice name=\"${item.speaker_name}\">${
-        selectedOptionSpeed.desc
-          ? `<prosody rate=\"${selectedOptionSpeed.desc}\">${item.audition_text}</prosody>`
-          : item.audition_text
-      }</voice></speak>`,
-      speaker:item.id,
-      original_text:`${item.audition_text}`
-    },
-    gen_url:true,
-  })
-
-  if(data.url){
-    audioSrc.value=data.url;
-    if(data){
-      setTimeout(()=>{
+  //data.url="https://assets.psyai.net/public/1c95f8d170e04db79591c7f074f2ef00.wav";
+  const defaultUrl="https://assets.psyai.net/public/1c95f8d170e04db79591c7f074f2ef00.wav";
+  if(defaultUrl){
+    audioSrc.value=defaultUrl;
+    setTimeout(()=>{
         // togglePlayback();
         if(playing.value) {
           audio.play();
@@ -575,7 +563,6 @@ async function auditionClick(item){
           loaderShow.value=false;
         },500)
       },0)
-    }
   }else{
     isMsg.value=true;
     tipsFun(data.msg,1500)
@@ -681,7 +668,7 @@ async function getListData(form,obj) {
       saveDataObj.LangID=CallBackObj.length>0&&CallBackObj[0].dialect;
       saveDataObj.VoiceID=CallBackObj.length>0&&CallBackObj[0].speaker_name;
       saveDataObj.LangDesc=document.querySelector('.selected span').innerHTML;
-      saveDataObj.DisplayName=CallBackObj.length>0&&CallBackObj[0].name;
+      saveDataObj.DisplayName=CallBackObj.length>0&&CallBackObj[0].desc;
       saveDataObj.SpeakerID=CallBackObj.length>0&&CallBackObj[0].id;
       saveDataObj.SpeakSpeed= selectedOptionSpeed.desc;
       listIndex.value=dataIndex;

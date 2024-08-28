@@ -132,8 +132,8 @@ async function setCollection(form, obj) {
 
 async function delCollection(form, obj) {
     let url = newPsyaiEditorUrl + 'audio/timbre/cancel/collect';
-        console.log(url);
-        console.log(obj);
+    console.log(url);
+    console.log(obj);
 
     return newCheckResult(await axios.post(url, {
         ...obj
@@ -149,18 +149,38 @@ async function delCollection(form, obj) {
 
 
 
+// async function aditionCreate(form) {
+//     return checkResult(await axios.post(psyaiEditorUrl + 'web-tools/tts/gen', {
+//         ...form
+//     },
+//         {
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 'token': psyaiEditorToken,
+//                 'uid': psyaiEditorUid
+//             },
+//         }))
+// }
+
 async function aditionCreate(form) {
-    return checkResult(await axios.post(psyaiEditorUrl + 'web-tools/tts/gen', {
+    let url = newPsyaiEditorUrl + 'audio/tts';
+    console.log(url);
+    console.log(form);
+
+    return newCheckResult(await axios.post(url, {
         ...form
     },
         {
+            withCredentials: false,
             headers: {
                 "Content-Type": "application/json",
-                'token': psyaiEditorToken,
-                'uid': psyaiEditorUid
+                'Authorization': authToken
             },
         }))
 }
+
+
+
 export {
     timbreEnum,
     getList,

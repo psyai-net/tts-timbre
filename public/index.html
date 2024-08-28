@@ -99,6 +99,7 @@
         virtualmanGender = parameterObj.virtualmanGender;
         virtualmanId=parameterObj.vmId;
         authToken=parameterObj.authToken;
+        console.log(parameterObjString);
     }
 
 
@@ -108,6 +109,7 @@
         ue.interface.setParameters(JSON.stringify({
             baseUrl:'https://dev.api.psyai.net',
             newBaseUrl:'https://wapi.psyai.net',
+            // newBaseUrl:'https://paas.psyai.com',
             token:'70aeee9d694ab251f3a579f4d01f61d911ac2ae1',
             uid:'6492761184d0ff378d61b80d',
             title:'声音tts',
@@ -117,7 +119,10 @@
             virtualmanKey:'49367d508e6b48e59db35c61992419a3',
             virtualmanGender:'male',
             vmId:"10859",
+            // vmId:"10019",
             authToken:"Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IndlYmFwcCIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiMzE4NGQ5NDY0YmU1NDIwMDdmOTMiXSwiZXhwIjoxNzI0OTAxOTEyLCJpYXQiOjE3MjQyOTcxMTIsImlkIjoiYjZkOWZiNTAtZDNjZS00OWJlLTg3NTgtN2IxNWQ0ZTI5ZWI4IiwiaXNBZG1pbiI6ZmFsc2UsImlzcyI6Imh0dHBzOi8vYXV0aC10ZXN0LnBzeWFpLm5ldCIsImp0aSI6ImFkbWluL2FjYjFmMDE0LTQxZjMtNDAwOS05ZjYzLTUyMDk2OTI4NTI5NCIsIm5hbWUiOiJiNmQ5ZmI1MC1kM2NlLTQ5YmUtODc1OC03YjE1ZDRlMjllYjgiLCJuYmYiOjE3MjQyOTcxMTIsIm5vbmNlIjoiIiwib3duZXIiOiJwc3lhaSIsInNjb3BlIjoiIiwic3ViIjoiYjZkOWZiNTAtZDNjZS00OWJlLTg3NTgtN2IxNWQ0ZTI5ZWI4IiwidGFnIjoiIiwidG9rZW5UeXBlIjoiYWNjZXNzLXRva2VuIn0.K5_e2cnI7vtw0nQnUz2hmGadNhBWc3aEVsE5L8kE7WKUBiTLg5qdqNuZ_9RJq3HXyyPsbCp5OIcMG3jU3KzV-bDKbMAuPaHWdsjWIB4izlCJrbOl_3yTDmul5kZEq6XlWoJipOywPft8vkYVL57WRUvLnYILNBhvK_dYKlB2hXweBddCnP7Loa9GuUYKuHLnCU1a8RTR1GGpITQcIyZYzZ3m3jYCrKu3hUZ5VxskKbFEVhmV9UrYKL0Q0hGUwa8g9Mrg9xDQ9lgwUnyt39rXFZIW44zUG1g1sq77Qmt64zA2R_VPobr42wxymEjeKUTb-6XHsvWzcDWFJnbGj7sI457CueeWRqbX1RSvaBUz0GZTcWsJvw6m8-2Zg32BF9lm3FmDYsZPiXnkCsemG1GJ5XJrgwk38_lYhL1lu24-LuF58nntmkl5lIxo8Hy_5wJtVM9g6I05wG40L0fFNzsP1WGaV9XezImUZEafzrExJvm2vn-aDKbhIC_jaoIkRGUNglgoUDX7v5iL-nsL3QUmk1M5k_qp8zd9RNiCDyw6UDQ3qTveOcK5oXhBNGfbEZ-f2Cn_Mzo3OBF1boKHWARIK1CUIr_EDkoT-zv9UO8PCnuka_hNBCSy8GPARgbzWosT1-eyKQnBLKs5x764csfpK7V5d_KGE71L0k96F8_BRNo"
+            // authToken:"Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImNlcnQtYnVpbHQtaW4iLCJ0eXAiOiJKV1QifQ.eyJhdWQiOlsiODQ3OTY4MWZlYWFmYjc5NDNjZDgiXSwiZXhwIjoxNzI1NDMzMDgwLCJpYXQiOjE3MjQ4MjgyODAsImlkIjoiMTA4OTk3YjAtZmMwYi00NzVhLTk1OTMtZjUwMGNmODQzMzE3IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLnBzeWFpLm5ldCIsImp0aSI6ImFkbWluLzM4ZWUyODgxLTg2NTItNGJjMi1hNGQ2LTliZTY3NTNlZDU2MCIsIm5hbWUiOiIxNTMxMzcyMDY3NiIsIm5iZiI6MTcyNDgyODI4MCwibm9uY2UiOiIiLCJvd25lciI6InBzeWFpIiwic2NvcGUiOiIiLCJzdWIiOiIxMDg5OTdiMC1mYzBiLTQ3NWEtOTU5My1mNTAwY2Y4NDMzMTciLCJ0YWciOiJzdGFmZiIsInRva2VuVHlwZSI6ImFjY2Vzcy10b2tlbiJ9.XuEVsj-Ly6xfmFhseZiJcI_zcMDRfC_dFYS-hRhfZSgaruMOuhkIx-LpyNyqy7Q1keeBJiFBctJxMFxRlBQA2io_rzIrVWQHinQ64c5ZY6U_O3qEgSMkIyX2BKIEDL1zup68PsJQdw7sCdHBJ8pdDIz_ZZG02k42U-0XLNZDvlVQihn41Lpn2L1rGquREWJlxUR2udAD88upyxcRA6L7VWbxhQlkwQjLVIdwF8Y2xyTd5TRkeoY_7XA91PLr2WgrMS7IaqZm3bk-sma2wB6m7xTrUx64yPVj7gnK8wshLVqLg-PyLafXfs2cw9y93gqFD7AEV9Th9XNDqyYDkyONJrLsOuVNpHurG9iQe5RJMgrmC5-kfLLCc8IpZAYQofiMtFgkpdCdr7N2X5YakuxD2oviSCNRsb88czyvKzMev7xWFVcftqh2mbSQTjzONIWsu2sduInbOJe1waPnBrsJVa2TwFIk4NSoQw1PYhPvTxWI58hC27nqoVOF2f0vrPL0cHCXsg7eH7HecQdBUvTJX39AjZuk9EsK9jmEFoQL_GZIKffx5seX6VG3s8zpXEKTlR7pm_yXeiw4LVPEyw-hgcp2kScG1eG98PcZzuYR7XYcPWXNwrm63biUnsWsrsYbB3rPCsmy1GLhICx0oYLSx1bzipds1LDRfZCvfG4WTtc"
+
         }))
         ue.interface.initData();
     },1000)
