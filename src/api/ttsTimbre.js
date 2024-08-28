@@ -20,26 +20,39 @@ function getSessions(key) {
 // }
 
 async function timbreEnum(form) {
-    let url = newPsyaiEditorUrl+'audio/timbre/enum'+'?classify=tts_country';
+    let url = newPsyaiEditorUrl + 'audio/timbre/enum' + '?classify=tts_country';
+    // let url = newPsyaiEditorUrl+'audio/timbre/enum'+'?classify=zh-CN';
     console.log(url);
     return newCheckResult(await axios.get(url,
-    {
-        withCredentials: false,
-        headers: {
-            "Content-Type": "application/json",
-            'Authorization':  authToken
-        },
-    }))
+        {
+            withCredentials: false,
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': authToken
+            },
+        }))
+}
+
+//todo 音色查询语言，还有应用场景参数添加；
+async function getList(form, obj) {
+    let url = newPsyaiEditorUrl + 'audio/timbre/list' + '?assetId=10859&language=zh-CN&page=1&pageSize=50';
+    console.log(url);
+    console.log(obj);
+    return newCheckResult(await axios.get(url,
+        {
+            withCredentials: false,
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': authToken
+            },
+        }))
 }
 
 // async function getList(form,obj) {
-//     let url = newPsyaiEditorUrl+'/audio/timbre/list'+'?assetId=10859&page=1&pageSize=50';
-//     console.log(url);
-//     return newCheckResult(await axios.post(url,{
+//     return checkResult(await axios.post(psyaiEditorUrl+'inner/joint/assets/tts/timbre/all_list'+form,{
 //             ...obj
 //         },
 //         {
-//             withCredentials: false,
 //             headers: {
 //                 "Content-Type": "application/json",
 //                 'token':  psyaiEditorToken,
@@ -48,68 +61,103 @@ async function timbreEnum(form) {
 //         }))
 // }
 
-async function getList(form,obj) {
-    return checkResult(await axios.post(psyaiEditorUrl+'inner/joint/assets/tts/timbre/all_list'+form,{
-            ...obj
-        },
-        {
-            headers: {
-                "Content-Type": "application/json",
-                'token':  psyaiEditorToken,
-                'uid':  psyaiEditorUid 
-            },
-        }))
-}
-
 async function getListCollect(form) {
-    let url = psyaiEditorUrl+'inner/joint/assets/tts/timbre/collect/list'+form;
+    let url = newPsyaiEditorUrl + 'audio/timbre/collect/list' + '?sex=male';
     console.log(url);
-    return checkResult(await axios.get(url,
+    return newCheckResult(await axios.get(url,
         {
+            withCredentials: false,
             headers: {
                 "Content-Type": "application/json",
-                'token':  psyaiEditorToken,
-                'uid':  psyaiEditorUid
+                'Authorization': authToken
+            },
+        }))
+}
+
+// async function getListCollect(form) {
+//     let url = psyaiEditorUrl+'inner/joint/assets/tts/timbre/collect/list'+form;
+//     console.log(url);
+//     return checkResult(await axios.get(url,
+//         {
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 'token':  psyaiEditorToken,
+//                 'uid':  psyaiEditorUid
+//             },
+//         }))
+// }
+
+
+// async function setCollection(form, obj) {
+//     return checkResult(await axios.post(psyaiEditorUrl + 'inner/joint/assets/tts/timbre/collect' + form, {
+//         ...obj
+//     },
+//         {
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 'token': psyaiEditorToken,
+//                 'uid': psyaiEditorUid
+//             },
+//         }))
+// }
+
+async function setCollection(form, obj) {
+    let url = newPsyaiEditorUrl + 'audio/timbre/collect';
+        console.log(url);
+        console.log(obj);
+    return newCheckResult(await axios.post(url, {
+        ...obj
+    },
+        {
+            withCredentials: false,
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': authToken
+            },
+        }))
+}
+
+// async function delCollection(form, obj) {
+//     return checkResult(await axios.post(psyaiEditorUrl + 'inner/joint/assets/tts/timbre/collect/cancel' + form, {
+//         ...obj
+//     },
+//         {
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 'token': psyaiEditorToken,
+//                 'uid': psyaiEditorUid
+//             },
+//         }))
+// }
+
+async function delCollection(form, obj) {
+    let url = newPsyaiEditorUrl + 'audio/timbre/cancel/collect';
+        console.log(url);
+        console.log(obj);
+
+    return newCheckResult(await axios.post(url, {
+        ...obj
+    },
+        {
+            withCredentials: false,
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': authToken
             },
         }))
 }
 
 
-async function setCollection(form,obj) {
-    return checkResult(await axios.post(psyaiEditorUrl+'inner/joint/assets/tts/timbre/collect'+form,{
-            ...obj
-        },
-        {
-            headers: {
-                "Content-Type": "application/json",
-                'token':  psyaiEditorToken,
-                'uid':  psyaiEditorUid
-            },
-        }))
-}
-
-async function delCollection(form,obj) {
-    return checkResult(await axios.post(psyaiEditorUrl+'inner/joint/assets/tts/timbre/collect/cancel'+form,{
-            ...obj
-        },
-        {
-            headers: {
-                "Content-Type": "application/json",
-                'token':  psyaiEditorToken,
-                'uid':  psyaiEditorUid
-            },
-        }))
-}
 
 async function aditionCreate(form) {
-    return checkResult(await axios.post(psyaiEditorUrl+'web-tools/tts/gen', {
-            ...form
-        },
+    return checkResult(await axios.post(psyaiEditorUrl + 'web-tools/tts/gen', {
+        ...form
+    },
         {
             headers: {
                 "Content-Type": "application/json",
-                'token':  psyaiEditorToken,
-                'uid':  psyaiEditorUid
+                'token': psyaiEditorToken,
+                'uid': psyaiEditorUid
             },
         }))
 }

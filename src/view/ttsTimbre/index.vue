@@ -93,7 +93,7 @@
                     </div>
                   </div>
                   <div class="sound-content">
-                    <img :src="options.value.filter((selectD)=>selectD.value==item.dialect)[0].img">
+                    <img v-if="options.value.filter((selectD)=>selectD.value==item.dialect).length > 0" :src="options.value.filter((selectD)=>selectD.value==item.dialect)[0].img">
                     <span>{{item.name}}</span>
                   </div>
                   <div class="sound-type" :style="listIndex==index ? 'display: flex' : 'display: none'">
@@ -286,14 +286,52 @@ function clickList(num,item){
   listIndex.value=num;
 }
 
+// async function collectFun(type,item){
+//   // console.log(item.id)
+//   // console.log(item.sex);
+//   getSigFun()
+//   if(type===1){
+//     var data=await delCollection(`?ak=${ak}&sig=${sig}&timeStamp=${timeStamp}`,{
+//       "speaker_id":item.id,
+//       "sex": item.sex
+//     })
+//     if(data.msg){
+//       tipsFun(data.msg,1500)
+//       return
+//     }
+//   }else{
+//     if(listCollect.length>=4){
+//       tipsFun('收藏不能超过4个');
+//       return
+//     }
+//     var data=await setCollection(`?ak=${ak}&sig=${sig}&timeStamp=${timeStamp}`,{
+//       "speaker_id":item.id,
+//       "sex": item.sex
+//     })
+//     if(data.msg){
+//       tipsFun(data.msg,1500)
+//       return
+//     }
+//   }
+
+//   setTimeout(()=>{
+//     getListCollectData(`?ak=${ak}&sig=${sig}&timeStamp=${timeStamp}&sex=${virtualmanGender}`)
+//     getListData(`?ak=${ak}&sig=${sig}&timeStamp=${timeStamp}`,{
+//     "virtualman_key":psyaiVirtualmanKey,
+//     "scene":scene.value,
+//     "language":language.value,
+//     "sex":virtualmanGender
+//   })
+//   },100)
+// }
+
 async function collectFun(type,item){
   // console.log(item.id)
   // console.log(item.sex);
   getSigFun()
   if(type===1){
     var data=await delCollection(`?ak=${ak}&sig=${sig}&timeStamp=${timeStamp}`,{
-      "speaker_id":item.id,
-      "sex": item.sex
+      "timbre_id":item.id,
     })
     if(data.msg){
       tipsFun(data.msg,1500)
@@ -305,7 +343,7 @@ async function collectFun(type,item){
       return
     }
     var data=await setCollection(`?ak=${ak}&sig=${sig}&timeStamp=${timeStamp}`,{
-      "speaker_id":item.id,
+      "timbre_id":item.id,
       "sex": item.sex
     })
     if(data.msg){
@@ -583,7 +621,9 @@ async function getTimbreEnum(obj) {
 
   optionsApply.value=data.scene;
   selectedOption.value=psyaiLangValue;
-  selectedOption.desc=data.language.filter(d=>{return d.value==psyaiLangValue})[0].desc
+  // selectedOption.desc=data.language.filter(d=>{return d.value==psyaiLangValue})[0].desc
+  let filteredData = data.language.filter(d => d.value == psyaiLangValue);
+  selectedOption.desc = filteredData.length > 0 ? filteredData[0].desc : 'Default Description';
   //
 
   // options.value.unshift(objText)
@@ -617,16 +657,17 @@ function resetFun(){
 async function getListData(form,obj) {
   getSigFun()
   const data= await getList(form,obj)
-  // console.log(data);
-  listData.splice(0, listData.length, ...data);
-  listData.forEach(obj => {
-    if(obj.labels){
-      var labels = obj.labels.split(',');
+  console.log(data);
+  console.log(obj);
+  listData.splice(0, listData.length, ...data.list);
+  listData.forEach(item => {
+    if(item.labels||listData.keys(item.labels).length!==0){
+      var labels = item.labels.split(',');
       var labelsText = labels.map(label => {
         var match = optionsApply.value.find(item => item.value === label);
         return match ? match.desc : '';
       });
-      obj.labelsText = labelsText;
+      item.labelsText = labelsText;
     }
   });
 
@@ -649,21 +690,26 @@ async function getListData(form,obj) {
   }
   stopAudio()
 }
+
+
 // async function getListData(form,obj) {
 //   getSigFun()
 //   const data= await getList(form,obj)
-//   // console.log(data);
+//   console.log(data);
+//   console.log(obj);
 //   listData.splice(0, listData.length, ...data);
-//   listData.forEach(obj => {
-//     if(obj.labels){
-//       var labels = obj.labels.split(',');
+//   listData.forEach(item => 
+//   {
+//     if(item.labels){
+//       var labels = item.labels.split(',');
 //       var labelsText = labels.map(label => {
 //         var match = optionsApply.value.find(item => item.value === label);
 //         return match ? match.desc : '';
 //       });
-//       obj.labelsText = labelsText;
+//       item.labelsText = labelsText;
 //     }
-//   });
+//   }
+// );
 
 //   if(callShow.value){
 //     selectedOptionSpeed.desc=psyaiSpeakSpeed
