@@ -354,12 +354,7 @@ async function collectFun(type,item){
 
   setTimeout(()=>{
     getListCollectData(`?ak=${ak}&sig=${sig}&timeStamp=${timeStamp}&sex=${virtualmanGender}`)
-    getListData(`?ak=${ak}&sig=${sig}&timeStamp=${timeStamp}`,{
-    "virtualman_key":psyaiVirtualmanKey,
-    "scene":scene.value,
-    "language":language.value,
-    "sex":virtualmanGender
-  })
+    getListData(`?assetId=${virtualmanId}&language=zh-CN&page=1&pageSize=50`)
   },100)
 }
 
@@ -415,12 +410,15 @@ function selectOption(option,type) {
     isDropdownOpen.value = !isDropdownOpen.value;
     selectedOption.desc=option.desc
     language.value=option.value;
-    getListData(`?ak=${ak}&sig=${sig}&timeStamp=${timeStamp}`,{
-    "virtualman_key":psyaiVirtualmanKey,
-    "scene":scene.value,
-    "language":language.value,
-    "sex":virtualmanGender
-  })
+  //   getListData(`?ak=${ak}&sig=${sig}&timeStamp=${timeStamp}`,{
+  //   "virtualman_key":psyaiVirtualmanKey,
+  //   "scene":scene.value,
+  //   "language":language.value,
+  //   "sex":virtualmanGender
+  // })
+    getListData(`?assetId=${virtualmanId}&language=${language.value}&scene=${scene.value}&page=1&pageSize=50`)
+
+
     isAnimation.value=false;
     setTimeout(()=>{
       isAnimation.value=true;
@@ -434,12 +432,13 @@ function selectOption(option,type) {
     selectedOptionApply.desc=option.desc
 
     scene.value=option.value;
-    getListData(`?ak=${ak}&sig=${sig}&timeStamp=${timeStamp}`,{
-    "virtualman_key":psyaiVirtualmanKey,
-    "scene":scene.value,
-    "language":language.value,
-    "sex":virtualmanGender
-  })
+  //   getListData(`?ak=${ak}&sig=${sig}&timeStamp=${timeStamp}`,{
+  //   "virtualman_key":psyaiVirtualmanKey,
+  //   "scene":scene.value,
+  //   "language":language.value,
+  //   "sex":virtualmanGender
+  // })
+    getListData(`?assetId=${virtualmanId}&language=${language.value}&scene=${scene.value}&page=1&pageSize=50`)
     isAnimation.value=false;
     setTimeout(()=>{
       isAnimation.value=true;
@@ -545,14 +544,18 @@ async function auditionClick(item){
   //  "DisplayName" : item.name,    //用于展示的声音名称
   //  "VirtualmanKey" : psyaiVirtualmanKey    //人物音色id
   //}
-  console.log(item);
+  // console.log('-------------------');
+  // console.log(item);
+  // console.log('-------------------');
+
   //试听接口
   loaderShow.value=true;
   getSigFun()
   //data.url="https://assets.psyai.net/public/1c95f8d170e04db79591c7f074f2ef00.wav";
   const defaultUrl="https://assets.psyai.net/public/1c95f8d170e04db79591c7f074f2ef00.wav";
-  if(defaultUrl){
-    audioSrc.value=defaultUrl;
+  if(item.audition_url){
+    // audioSrc.value=defaultUrl;
+    audioSrc.value=item.audition_url;
     setTimeout(()=>{
         // togglePlayback();
         if(playing.value) {
@@ -565,7 +568,7 @@ async function auditionClick(item){
       },0)
   }else{
     isMsg.value=true;
-    tipsFun(data.msg,1500)
+    tipsFun("没有默认音频",1500)
   }
 
 };
@@ -617,12 +620,14 @@ async function getTimbreEnum(obj) {
   // Object.assign(options.value, {objText});
 
   // console.log(options,343434)
-  getListData(`?ak=${ak}&sig=${sig}&timeStamp=${timeStamp}`,{
-    "virtualman_key":psyaiVirtualmanKey,
-    "scene":scene.value,
-    "language":language.value,
-    "sex":virtualmanGender
-  })
+  // getListData(`?ak=${ak}&sig=${sig}&timeStamp=${timeStamp}`,{
+  //   "virtualman_key":psyaiVirtualmanKey,
+  //   "scene":scene.value,
+  //   "language":language.value,
+  //   "sex":virtualmanGender
+  // })
+  getListData(`?assetId=${virtualmanId}&language=zh-CN&page=1&pageSize=50`)
+
 
   getListCollectData(`?ak=${ak}&sig=${sig}&timeStamp=${timeStamp}&sex=${virtualmanGender}`)
 

@@ -22,11 +22,12 @@ function getSessions(key) {
 async function timbreEnum(form) {
     let url = newPsyaiEditorUrl + 'audio/timbre/enum' + '?classify=tts_country';
     // let url = newPsyaiEditorUrl+'audio/timbre/enum'+'?classify=zh-CN';
-    console.log(url);
+    // console.log(url);
     return newCheckResult(await axios.get(url,
         {
             withCredentials: false,
             headers: {
+                "Accept-Language": "zh",
                 "Content-Type": "application/json",
                 'Authorization': authToken
             },
@@ -35,13 +36,14 @@ async function timbreEnum(form) {
 
 //todo 音色查询语言，还有应用场景参数添加；
 async function getList(form, obj) {
-    let url = newPsyaiEditorUrl + 'audio/timbre/list' + '?assetId=10859&language=zh-CN&page=1&pageSize=50';
-    console.log(url);
-    console.log(obj);
+    let url = newPsyaiEditorUrl + 'audio/timbre/list' + form;
+    // console.log(url);
+    // console.log(obj);
     return newCheckResult(await axios.get(url,
         {
             withCredentials: false,
             headers: {
+                "Accept-Language": "zh",
                 "Content-Type": "application/json",
                 'Authorization': authToken
             },
@@ -63,7 +65,7 @@ async function getList(form, obj) {
 
 async function getListCollect(form) {
     let url = newPsyaiEditorUrl + 'audio/timbre/collect/list' + '?sex=male';
-    console.log(url);
+    // console.log(url);
     return newCheckResult(await axios.get(url,
         {
             withCredentials: false,
@@ -103,8 +105,8 @@ async function getListCollect(form) {
 
 async function setCollection(form, obj) {
     let url = newPsyaiEditorUrl + 'audio/timbre/collect';
-        console.log(url);
-        console.log(obj);
+        // console.log(url);
+        // console.log(obj);
     return newCheckResult(await axios.post(url, {
         ...obj
     },
@@ -132,8 +134,8 @@ async function setCollection(form, obj) {
 
 async function delCollection(form, obj) {
     let url = newPsyaiEditorUrl + 'audio/timbre/cancel/collect';
-    console.log(url);
-    console.log(obj);
+    // console.log(url);
+    // console.log(obj);
 
     return newCheckResult(await axios.post(url, {
         ...obj
@@ -164,8 +166,8 @@ async function delCollection(form, obj) {
 
 async function aditionCreate(form) {
     let url = newPsyaiEditorUrl + 'audio/tts';
-    console.log(url);
-    console.log(form);
+    // console.log(url);
+    // console.log(form);
 
     return newCheckResult(await axios.post(url, {
         ...form
