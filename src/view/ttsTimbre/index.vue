@@ -22,7 +22,7 @@
               </div>
               <div class="sound-content">
                 <img :src="options.value.filter((selectD) => selectD.value == item.dialect)[0].img">
-                <span>{{ item.desc }}</span>
+                <span>{{ item.name }}</span>
               </div>
               <div class="sound-type" :style="listIndex == index + 1000 ? 'display: flex' : 'display: none'">
                 <div class="sound-type-btn">
@@ -94,9 +94,8 @@
                     </div>
                   </div>
                   <div class="sound-content">
-                    <img v-if="options.value.filter((selectD) => selectD.value == item.dialect).length > 0"
-                      :src="options.value.filter((selectD) => selectD.value == item.dialect)[0].img">
-                    <span>{{ item.desc }}</span>
+                    <img :src="item.img">
+                    <span>{{ item.name }}</span>
                   </div>
                   <div class="sound-type" :style="listIndex == index ? 'display: flex' : 'display: none'">
                     <div class="sound-type-btn">
@@ -149,6 +148,7 @@ var uid = psyaiEditorUid;    //uid
 var timeStamp = parseInt(new Date().getTime() / 1000);
 let sig = getSig(uid, timeStamp);
 let pageIndex = 1;
+let pageSize = 20;
 var jsonString = {
   "LangID": "",        //SSML所需的 xml:lang的值 如 "zh-CN"
   "VoiceID": "",        //SSML所需的 voice name的值 如 "zh-CN-XiaoxiaoNeural"
@@ -285,9 +285,11 @@ function clickList(num, item) {
   saveDataObj.LangID = item.dialect;
   saveDataObj.VoiceID = item.speaker_name;
   saveDataObj.LangDesc = document.querySelector('.selected span').innerHTML;
-  saveDataObj.DisplayName = item.desc;
+  saveDataObj.DisplayName = item.name;
   saveDataObj.SpeakerID = item.id;
   listIndex.value = num;
+  // console.log(listIndex.value);
+  console.log(saveDataObj);
 }
 
 // async function collectFun(type,item){
@@ -358,7 +360,7 @@ async function collectFun(type, item) {
 
   setTimeout(() => {
     getListCollectData(`?ak=${ak}&sig=${sig}&timeStamp=${timeStamp}&sex=${virtualmanGender}`)
-    getListData(`?assetId=${virtualmanId}&language=${language.value}&scene=${scene.value}&page=1&pageSize=50`)
+    getListData(`?assetId=${virtualmanId}&language=${language.value}&scene=${scene.value}&page=1&pageSize=${pageSize}`)
   }, 100)
 }
 
@@ -408,12 +410,12 @@ function selectOption(option, type) {
   isDropdownOpen.value = false;
   pageIndex = 1;
   if (type == 1) {
-    saveDataObj.LangDesc = option.desc
+    saveDataObj.LangDesc = option.name
     isDropdownApplyOpen.value = false;
     isDropdownSpeedOpen.value = false;
     saveDataObj.SpeakSpeed = selectedOptionSpeed.desc;
     isDropdownOpen.value = !isDropdownOpen.value;
-    selectedOption.desc = option.desc
+    selectedOption.desc = option.desc;
     language.value = option.value;
     //   getListData(`?ak=${ak}&sig=${sig}&timeStamp=${timeStamp}`,{
     //   "virtualman_key":psyaiVirtualmanKey,
@@ -421,7 +423,7 @@ function selectOption(option, type) {
     //   "language":language.value,
     //   "sex":virtualmanGender
     // })
-    getListData(`?assetId=${virtualmanId}&language=${language.value}&scene=${scene.value}&page=${pageIndex}&pageSize=50`)
+    getListData(`?assetId=${virtualmanId}&language=${language.value}&scene=${scene.value}&page=1&pageSize=${pageSize}`)
 
 
     isAnimation.value = false;
@@ -443,7 +445,7 @@ function selectOption(option, type) {
     //   "language":language.value,
     //   "sex":virtualmanGender
     // })
-    getListData(`?assetId=${virtualmanId}&language=${language.value}&scene=${scene.value}&page=${pageIndex}&pageSize=50`)
+    getListData(`?assetId=${virtualmanId}&language=${language.value}&scene=${scene.value}&page=1&pageSize=${pageSize}`)
 
     isAnimation.value = false;
     setTimeout(() => {
@@ -620,12 +622,12 @@ function init() {
     //log listData.length
     console.log('listData.length:', listData.length);
 
-    if (scrollTop + clientHeight + bottomOffset >= scrollHeight && listData.length >= 50 * pageIndex) {
+    if (scrollTop + clientHeight + bottomOffset >= scrollHeight && listData.length >= 20 * pageIndex) {
       // 滚动条已经滚动到底部，请求新的数据
       pageIndex++;
       console.log('fetch new data !!!!! pageIndex:', pageIndex);
       tempListData.splice(0, tempListData.length);
-      fetchNewData(`?assetId=${virtualmanId}&language=${language.value}&scene=${scene.value}&page=${pageIndex}&pageSize=50`)
+      fetchNewData(`?assetId=${virtualmanId}&language=${language.value}&scene=${scene.value}&page=${pageIndex}&pageSize=${pageSize}`)
       // //log tempListData
       // console.log('tempListData:', tempListData);
       // //log listData
@@ -677,7 +679,7 @@ async function getTimbreEnum(obj) {
   //   "sex":virtualmanGender
   // })
   
-  getListData(`?assetId=${virtualmanId}&language=${language.value}&scene=${scene.value}&page=${pageIndex}&pageSize=50`)
+  getListData(`?assetId=${virtualmanId}&language=${language.value}&scene=${scene.value}&page=1&pageSize=${pageSize}`)
 
 
   getListCollectData(`?ak=${ak}&sig=${sig}&timeStamp=${timeStamp}&sex=${virtualmanGender}`)
@@ -689,7 +691,7 @@ function resetFun() {
   selectedOption.desc = '语言';
   selectedOptionApply.desc = '应用场景';
   pageIndex = 1;
-  getListData(`?assetId=${virtualmanId}&language=${language.value}&scene=${scene.value}&page=${pageIndex}&pageSize=50`)
+  getListData(`?assetId=${virtualmanId}&language=${language.value}&scene=${scene.value}&page=1&pageSize=${pageSize}`)
 
   closeIsDrop();
 }

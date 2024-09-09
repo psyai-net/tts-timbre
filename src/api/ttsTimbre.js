@@ -70,6 +70,7 @@ async function getListCollect(form) {
         {
             withCredentials: false,
             headers: {
+                "Accept-Language": "zh",
                 "Content-Type": "application/json",
                 'Authorization': authToken
             },
