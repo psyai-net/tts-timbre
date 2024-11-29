@@ -1,13 +1,31 @@
-const MICROSOFT = "microsoft";
-const TENCENT = "tencent";
-const CHUMENWENWEN = "moyin";
-const ALIYUN = "aliyun";
+// export const MICROSOFT = "microsoft";
+// export const TENCENT = "tencent";
+// export const CHUMENWENWEN = "moyin";
+// export const ALIYUN = "aliyun";
+// export const ELEVENLABS = "eleven-labs";
 
+export const MICROSOFT = "azure";
+export const TENCENT = "tencent";
+export const CHUMENWENWEN = "moyin";
+export const ALIYUN = "alibaba";
+export const ELEVENLABS = "eleven-labs";
+
+// export const ID_TO_COMPANYS = {
+//   "642a7b3fb9b3dde907f9a740": MICROSOFT,
+//   "647f3ab2710f103710858f9a": TENCENT,
+//   "64f03887f4a4549398d61e35": CHUMENWENWEN,
+//   "656d7a0d32e6b419094a6ee0": ALIYUN,
+//   "64c9cc0680009c782090c73a": ELEVENLABS,
+// };
 export const ID_TO_COMPANYS = {
-  "642a7b3fb9b3dde907f9a740": MICROSOFT,
-  "647f3ab2710f103710858f9a": TENCENT,
-  "64f03887f4a4549398d61e35": CHUMENWENWEN,
-  "656d7a0d32e6b419094a6ee0": ALIYUN,
+  "azure": MICROSOFT,
+  "tencent": TENCENT,
+  "moyin": CHUMENWENWEN,
+  "alibaba": ALIYUN,
+  "ElevenLabs": ELEVENLABS,
+  "undefined": ELEVENLABS,
+  "FishAudio": ELEVENLABS,
+  "minimax": ELEVENLABS,
 };
 
 export const REAL_SSML_TAG_MAP = {
@@ -184,6 +202,34 @@ export function htmlToSsml(
                     : dataVal
                 )
               : getContent();
+              // // 提取当前数据类型的处理函数
+              // const ssmlTagHandler = realSsmlTags[dataType];
+
+              // // 获取标签内容
+              // let tagContent = getContent();
+
+              // // 判断是否有有效的 dataMark
+              // let valueToUse;
+              // if (dataMark && dataMark !== "null") {
+              //     // 根据 dataMark 查找具体的值
+              //     const labelEntry = labelData[speakerCompany][dataType].find(
+              //         (e) => e.item_mark === dataMark
+              //     );
+
+              //     // 如果找到对应项，取其 value，否则保持 undefined
+              //     valueToUse = labelEntry ? labelEntry.value : undefined;
+              // } else {
+              //     // 如果 dataMark 不存在或为 "null"，使用 dataVal
+              //     valueToUse = dataVal;
+              // }
+
+              // // 构建新的内容
+              // if (ssmlTagHandler) {
+              //     newContent += ssmlTagHandler(tagContent, valueToUse);
+              // } else {
+              //     // 如果没有处理函数，则仅追加内容
+              //     newContent += tagContent;
+              // }
             break;
           case "volumeEnum":
             newContent += realSsmlTags[dataType]

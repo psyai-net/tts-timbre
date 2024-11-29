@@ -1,167 +1,186 @@
 <!DOCTYPE html>
 <html lang="">
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
     <script>
-      window.developMode = true;
+        window.developMode = false;
     </script>
-  </head>
-  <body onload="pageLoaded()">
+</head>
+
+<body onload="pageLoaded()">
     <noscript>
-      <strong
-        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
-        properly without JavaScript enabled. Please enable it to
-        continue.</strong
-      >
+        <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
+                properly without JavaScript enabled. Please enable it to
+                continue.</strong>
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
-  </body>
-  <script defer="defer">
+</body>
+<script defer="defer">
     // create the global ue5(...) helper function
     "object" != typeof ue && (ue = {}),
-      (uuidv4 = function () {
-        return "10000000-1000-4000-8000-100000000000".replace(
-          /[018]/g,
-          function (t) {
+        (uuidv4 = function () {
+            return "10000000-1000-4000-8000-100000000000".replace(
+                /[018]/g,
+                function (t) {
+                    return (
+                        t ^
+                        (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (t / 4)))
+                    ).toString(16);
+                }
+            );
+        }),
+        (ue5 = (function (r) {
+            return "object" != typeof ue.interface ||
+                "function" != typeof ue.interface.broadcast
+                ? ((ue.interface = {}),
+                    function (t, e, n, o) {
+                        var u, i;
+                        "string" == typeof t &&
+                            ("function" == typeof e && ((o = n), (n = e), (e = null)),
+                                (u = [t, "", r(n, o)]),
+                                void 0 !== e && (u[1] = e),
+                                (i = encodeURIComponent(JSON.stringify(u))),
+                                "object" == typeof history &&
+                                    "function" == typeof history.pushState
+                                    ? (history.pushState({}, "", "#" + i),
+                                        history.pushState({}, "", "#" + encodeURIComponent("[]")))
+                                    : ((document.location.hash = i),
+                                        (document.location.hash = encodeURIComponent("[]"))));
+                    })
+                : ((i = ue.interface),
+                    (ue.interface = {}),
+                    function (t, e, n, o) {
+                        var u;
+                        "string" == typeof t &&
+                            ("function" == typeof e && ((o = n), (n = e), (e = null)),
+                                (u = r(n, o)),
+                                void 0 !== e
+                                    ? i.broadcast(t, JSON.stringify(e), u)
+                                    : i.broadcast(t, "", u));
+                    });
+            var i;
+        })(function (t, e) {
+            if ("function" != typeof t) return "";
+            var n = uuidv4();
             return (
-              t ^
-              (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (t / 4)))
-            ).toString(16);
-          }
-        );
-      }),
-      (ue5 = (function (r) {
-        return "object" != typeof ue.interface ||
-          "function" != typeof ue.interface.broadcast
-          ? ((ue.interface = {}),
-            function (t, e, n, o) {
-              var u, i;
-              "string" == typeof t &&
-                ("function" == typeof e && ((o = n), (n = e), (e = null)),
-                (u = [t, "", r(n, o)]),
-                void 0 !== e && (u[1] = e),
-                (i = encodeURIComponent(JSON.stringify(u))),
-                "object" == typeof history &&
-                "function" == typeof history.pushState
-                  ? (history.pushState({}, "", "#" + i),
-                    history.pushState({}, "", "#" + encodeURIComponent("[]")))
-                  : ((document.location.hash = i),
-                    (document.location.hash = encodeURIComponent("[]"))));
-            })
-          : ((i = ue.interface),
-            (ue.interface = {}),
-            function (t, e, n, o) {
-              var u;
-              "string" == typeof t &&
-                ("function" == typeof e && ((o = n), (n = e), (e = null)),
-                (u = r(n, o)),
-                void 0 !== e
-                  ? i.broadcast(t, JSON.stringify(e), u)
-                  : i.broadcast(t, "", u));
-            });
-        var i;
-      })(function (t, e) {
-        if ("function" != typeof t) return "";
-        var n = uuidv4();
-        return (
-          (ue.interface[n] = t),
-          setTimeout(function () {
-            delete ue.interface[n];
-          }, 1e3 * Math.max(1, parseInt(e) || 0)),
-          n
-        );
-      }));
+                (ue.interface[n] = t),
+                setTimeout(function () {
+                    delete ue.interface[n];
+                }, 1e3 * Math.max(1, parseInt(e) || 0)),
+                n
+            );
+        }));
 
     function setZoomBasedOnDPI() {
-      var dpi = window.devicePixelRatio;
-      console.log(dpi);
-      dpi = dpi < 1.5 ? 1.5 : dpi;
-      var zoomLevel = 1.5 / dpi;
-      console.log(zoomLevel);
-      document.body.style.zoom = zoomLevel == 1 ? 0.99 : zoomLevel;
+        var dpi = window.devicePixelRatio;
+        console.log(dpi);
+        dpi = dpi < 1.5 ? 1.5 : dpi;
+        var zoomLevel = 1.5 / dpi;
+        console.log(zoomLevel);
+        document.body.style.zoom = zoomLevel == 1 ? 0.99 : zoomLevel;
     }
 
     function pageLoaded() {
-      setZoomBasedOnDPI();
-      ue5("HTMLLoaded", "");
+        setZoomBasedOnDPI();
+        ue5("HTMLLoaded", "");
     }
 
-    let psyaiEditorToken = ""; //token
-    let psyaiEditorUid = ""; //uid
-    let psyaiEditorUrl = ""; //接口请求地址
-    let psyaiEditorData = "";
-    let psyaiTextEditorTitle = ""; //弹窗标题
-    let psyaiVirtualmanKey = "";
+
+    let psyaiEditorToken = '';   //token
+    let psyaiEditorUid = '';//uid
+    let psyaiEditorUrl = '';  //接口请求地址
+    let newPsyaiEditorUrl = '';  //接口请求地址
+    let psyaiEditorData = '';
+    let psyaiTextEditorTitle = ''   //弹窗标题
+    let psyaiVirtualmanKey = ''
     // let psyaiVoiceID = ''
     // let psyaiSpeakSpeed = ''
     // let psyaiLangValue = ''
-    let virtualmanGender = "";
+    let virtualmanGender = '';
+    let virtualmanId = '';
+    let authToken = '';
+
 
     psyaiSaveFun = (obj) => {
-      console.log(obj);
-      ue5("SelectVoiceConfirm", obj);
+        console.log(obj);
+        ue5("SelectVoiceConfirm", obj);
     };
 
     psyaiCancelFun = () => {
-      ue5("SelectVoiceCancel", "");
+        ue5("SelectVoiceCancel", "");
     };
 
     ue.interface.setParameters = (parameterObjString) => {
-      let parameterObj = JSON.parse(parameterObjString);
-      console.log(parameterObj);
+        let parameterObj = JSON.parse(parameterObjString);
+        console.log(parameterObj);
 
-      psyaiEditorUrl = parameterObj.baseUrl + "/";
-      psyaiEditorToken = parameterObj.token;
-      psyaiEditorUid = parameterObj.uid;
-      psyaiTextEditorTitles.value = parameterObj.title;
-      psyaiVirtualmanKey = parameterObj.virtualmanKey;
 
-      psyaiLangValue = parameterObj.langValue ? parameterObj.langValue : "";
-      psyaiVoiceID = parameterObj.voiceId ? parameterObj.voiceId : "";
-      psyaiSpeakSpeed = parameterObj.speakSpeed ? parameterObj.speakSpeed : "";
+        psyaiEditorUrl = parameterObj.baseUrl + "/";
+        newPsyaiEditorUrl = parameterObj.newBaseUrl + "/";
+        psyaiEditorToken = parameterObj.token;
+        psyaiEditorUid = parameterObj.uid;
+        psyaiTextEditorTitles.value = parameterObj.title;
+        psyaiVirtualmanKey = parameterObj.virtualmanKey;
 
-      virtualmanGender = parameterObj.virtualmanGender;
-      ssmlInfo.value = parameterObj.ssmlInfo;
-    };
+        psyaiLangValue = parameterObj.langValue ? parameterObj.langValue : '';
+        psyaiVoiceID = parameterObj.voiceId ? parameterObj.voiceId : '';
+        psyaiSpeakSpeed = parameterObj.speakSpeed ? parameterObj.speakSpeed : '';
+
+        virtualmanGender = parameterObj.virtualmanGender;
+        virtualmanId = parameterObj.vmId;
+        authToken = parameterObj.authToken;
+        ssmlInfo.value = parameterObj.ssmlInfo;
+        console.log(parameterObjString);
+    }
 
     //方式调用示例，之后可删除
     if (developMode) {
-      setTimeout(() => {
-        ue.interface.setParameters(
-          JSON.stringify({
-            baseUrl: "https://dev.api.psyai.net",
-            token: "70aeee9d694ab251f3a579f4d01f61d911ac2ae1",
-            uid: "6492761184d0ff378d61b80d",
-            title: "声音tts",
-            langValue: "zh-CN", //当选择为全部时为空
-            voiceId: "64d1a565477c804c832ddd47", //可能为空
-            speakSpeed: "2.0",
-            virtualmanKey: "49367d508e6b48e59db35c61992419a3",
-            virtualmanGender: "male",
-
-            ssmlInfo: {
-              speed: 1.25,
-              // text: "你好，朝阳测试一下6688123哈哈哈",
-              text: '你好，测试测<div class="editorTags pauseEnum"><pre><br></pre><div class="optionBtn editorTagsOption readonly" contenteditable="false" data-optionbtn="optionBtn"><strong>2秒</strong><div class="editorTagsOptionBox"><div class="editorList" data-index="0" data-type="pauseEnum" data-desc="0.25秒" data-val="250ms">\n              <p><br></p>\n              <span>0.25秒</span>\n            </div><div class="editorList" data-index="1" data-type="pauseEnum" data-desc="0.5秒" data-val="500ms">\n              <p><br></p>\n              <span>0.5秒</span>\n            </div><div class="editorList" data-index="2" data-type="pauseEnum" data-desc="1秒" data-val="1000ms">\n              <p><br></p>\n              <span>1秒</span>\n            </div><div class="editorList" data-index="3" data-type="pauseEnum" data-desc="2秒" data-val="2000ms">\n              <p class="active"><br></p>\n              <span>2秒</span>\n            </div><div class="editorList" data-index="-1">\n        <p><br></p>\n        <span>移除</span>\n      </div></div></div><pre><br></pre></div>试测<div class="editorTags pinyin"><pre><br></pre><span class="border valText" data-type="pinyin" data-mark="undefined" data-desc="cháo" data-val="cháo" data-numval="cha2o">朝</span><div class="optionBtn editorTagsOption readonly" contenteditable="false" data-optionbtn="optionBtn"><strong>cháo</strong><div class="editorTagsOptionBox"><div class="editorList" data-index="0" data-type="pinyin" data-desc="cháo" data-val="cháo">\n              <p class="active"><br></p>\n              <span>cháo</span>\n            </div><div class="editorList" data-index="1" data-type="pinyin" data-desc="zhāo" data-val="zhāo">\n              <p class="active"><br></p>\n              <span>zhāo</span>\n            </div><div class="editorList" data-index="2" data-type="pinyin" data-desc="zhū" data-val="zhū">\n              <p class="active"><br></p>\n              <span>zhū</span>\n            </div><div class="editorList" data-index="-1">\n        <p><br></p>\n        <span>移除</span>\n      </div></div></div><pre><br></pre></div>阳<div class="editorTags speechSpeedEnum"><pre><br></pre><pre><br></pre><em>[</em><pre><br></pre><span class="valText" data-type="speechSpeedEnum" data-mark="speech_speed_15" data-desc="1.5倍" data-val="1.5">试测试测</span><pre><br></pre><em>]</em><pre><br></pre><div class="optionBtn editorTagsOption readonly" contenteditable="false" data-optionbtn="optionBtn"><strong>1.5倍</strong><div class="editorTagsOptionBox"><div class="editorList" data-index="0" data-type="speechSpeedEnum" data-desc="0.5倍" data-val="0.5">\n              <p><br></p>\n              <span>0.5倍</span>\n            </div><div class="editorList" data-index="1" data-type="speechSpeedEnum" data-desc="0.6倍" data-val="0.6">\n              <p><br></p>\n              <span>0.6倍</span>\n            </div><div class="editorList" data-index="2" data-type="speechSpeedEnum" data-desc="0.7倍" data-val="0.7">\n              <p><br></p>\n              <span>0.7倍</span>\n            </div><div class="editorList" data-index="3" data-type="speechSpeedEnum" data-desc="0.8倍" data-val="0.8">\n              <p><br></p>\n              <span>0.8倍</span>\n            </div><div class="editorList" data-index="4" data-type="speechSpeedEnum" data-desc="0.9倍" data-val="0.9">\n              <p><br></p>\n              <span>0.9倍</span>\n            </div><div class="editorList" data-index="5" data-type="speechSpeedEnum" data-desc="1倍" data-val="1">\n              <p><br></p>\n              <span>1倍</span>\n            </div><div class="editorList" data-index="6" data-type="speechSpeedEnum" data-desc="1.1倍" data-val="1.1">\n              <p><br></p>\n              <span>1.1倍</span>\n            </div><div class="editorList" data-index="7" data-type="speechSpeedEnum" data-desc="1.2倍" data-val="1.2">\n              <p><br></p>\n              <span>1.2倍</span>\n            </div><div class="editorList" data-index="8" data-type="speechSpeedEnum" data-desc="1.3倍" data-val="1.3">\n              <p><br></p>\n              <span>1.3倍</span>\n            </div><div class="editorList" data-index="9" data-type="speechSpeedEnum" data-desc="1.4倍" data-val="1.4">\n              <p><br></p>\n              <span>1.4倍</span>\n            </div><div class="editorList" data-index="10" data-type="speechSpeedEnum" data-desc="1.5倍" data-val="1.5">\n              <p class="active"><br></p>\n              <span>1.5倍</span>\n            </div><div class="editorList" data-index="-1">\n        <p><br></p>\n        <span>移除</span>\n      </div></div></div><pre><br></pre></div><div class="editorTags continuous"><pre><br></pre><span class="border valText" data-type="continuous" data-mark="undefined" data-desc="连续词语" data-val="continuous" data-numval="undefined">试测6</span><div class="optionBtn editorTagsOption readonly" contenteditable="false" data-optionbtn="optionBtn"><strong>连续词语</strong><div class="editorTagsOptionBox"><div class="editorList" data-index="-1">\n        <p><br></p>\n        <span>移除</span>\n      </div></div></div><pre><br></pre></div>666<div class="editorTags digitSymbolEnum"><pre><br></pre><pre><br></pre><em>[</em><pre><br></pre><span class="valText" data-type="digitSymbolEnum" data-mark="symbol_name" data-desc="人名" data-val="name">6666888</span><pre><br></pre><em>]</em><pre><br></pre><div class="optionBtn editorTagsOption readonly" contenteditable="false" data-optionbtn="optionBtn"><strong>人名</strong><div class="editorTagsOptionBox"><div class="editorList" data-index="0" data-type="digitSymbolEnum" data-desc="电话（幺三三 幺幺二二 三三四四）" data-val="telephone">\n              <p><br></p>\n              <span>电话（幺三三 幺幺二二 三三四四）</span>\n            </div><div class="editorList" data-index="1" data-type="digitSymbolEnum" data-desc="序列（一三三一一二二三三四四）" data-val="number_digit">\n              <p><br></p>\n              <span>序列（一三三一一二二三三四四）</span>\n            </div><div class="editorList" data-index="2" data-type="digitSymbolEnum" data-desc="地址" data-val="address">\n              <p><br></p>\n              <span>地址</span>\n            </div><div class="editorList" data-index="3" data-type="digitSymbolEnum" data-desc="人名" data-val="name">\n              <p class="active"><br></p>\n              <span>人名</span>\n            </div><div class="editorList" data-index="-1">\n        <p><br></p>\n        <span>移除</span>\n      </div></div></div><pre><br></pre></div>88888试<div class="editorTags volumeEnum"><pre><br></pre><pre><br></pre><em>[</em><pre><br></pre><span class="valText" data-type="volumeEnum" data-mark="volume_pos_50" data-desc="1.5倍" data-val="+50%">测试测</span><pre><br></pre><em>]</em><pre><br></pre><div class="optionBtn editorTagsOption readonly" contenteditable="false" data-optionbtn="optionBtn"><strong>1.5倍</strong><div class="editorTagsOptionBox"><div class="editorList" data-index="0" data-type="volumeEnum" data-desc="0.5倍" data-val="-50%">\n              <p><br></p>\n              <span>0.5倍</span>\n            </div><div class="editorList" data-index="1" data-type="volumeEnum" data-desc="0.75倍" data-val="-25%">\n              <p><br></p>\n              <span>0.75倍</span>\n            </div><div class="editorList" data-index="2" data-type="volumeEnum" data-desc="1.25倍" data-val="+25%">\n              <p><br></p>\n              <span>1.25倍</span>\n            </div><div class="editorList" data-index="3" data-type="volumeEnum" data-desc="1.5倍" data-val="+50%">\n              <p class="active"><br></p>\n              <span>1.5倍</span>\n            </div><div class="editorList" data-index="-1">\n        <p><br></p>\n        <span>移除</span>\n      </div></div></div><pre><br></pre></div>试测试测<div class="editorTags toneEnum"><pre><br></pre><pre><br></pre><em>[</em><pre><br></pre><span class="valText" data-type="toneEnum" data-mark="tone_high" data-desc="高" data-val="high">试测试测试</span><pre><br></pre><em>]</em><pre><br></pre><div class="optionBtn editorTagsOption readonly" contenteditable="false" data-optionbtn="optionBtn"><strong>高</strong><div class="editorTagsOptionBox"><div class="editorList" data-index="0" data-type="toneEnum" data-desc="高" data-val="high">\n              <p class="active"><br></p>\n              <span>高</span>\n            </div><div class="editorList" data-index="1" data-type="toneEnum" data-desc="中" data-val="medium">\n              <p><br></p>\n              <span>中</span>\n            </div><div class="editorList" data-index="2" data-type="toneEnum" data-desc="低" data-val="low">\n              <p><br></p>\n              <span>低</span>\n            </div><div class="editorList" data-index="-1">\n        <p><br></p>\n        <span>移除</span>\n      </div></div></div><pre><br></pre></div>测试测试测试测试测试测试测试测试测试',
-              ssmlText: "",
-              psyaiLangReplace: "PsyaiLangID",
-              psyaiVoiceReplace: "PsyaiVoiceID",
-              virtualmanKey: "64023f6b7c000a32e1ff0356", // 微软
-              // virtualmanKey: "64ba31bf3817faaec27f6705", // 腾讯
-              // virtualmanKey: "650175a6f4a4549398d61e73", // 出门问问
-              // virtualmanKey: "656e99f432e6b419094a6ee4", // 阿里云
-              emotionValue: "advertisement_upbeat",
-              emotionText: "兴奋",
-            },
-          })
-        );
-        ue.interface.initData();
-      }, 1000);
+        setTimeout(() => {
+            ue.interface.setParameters(JSON.stringify({
+                baseUrl: 'https://dev.api.psyai.net',
+                newBaseUrl: 'https://paas-testing.psyai.com',
+                // newBaseUrl:'https://paas.psyai.com',
+                token: '70aeee9d694ab251f3a579f4d01f61d911ac2ae1',
+                uid: '6492761184d0ff378d61b80d',
+                title: '声音tts',
+                langValue: 'zh-CN',  //当选择为全部时为空
+                voiceId: "", //可能为空
+                speakSpeed: '2.0',
+                virtualmanKey: '49367d508e6b48e59db35c61992419a3',
+                virtualmanGender: 'male',
+                vmId: "10859",
+                // vmId:"10019",
+                authToken: "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IndlYmFwcCIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiMzE4NGQ5NDY0YmU1NDIwMDdmOTMiXSwiYXZhdGFyIjoiaHR0cHM6Ly9jZG4uY2FzYmluLm9yZy9pbWcvY2FzYmluLnN2ZyIsImVtYWlsIjoiIiwiZXhwIjoxNzMzMzY5ODAzLCJpYXQiOjE3MzI3NjUwMDMsImlkIjoiZTdhYjdhYTktNjBhYi00MTcwLTljNmEtODkxMGQ5MWRmMDBkIiwiaXNBZG1pbiI6ZmFsc2UsImlzcyI6Imh0dHBzOi8vYXV0aC10ZXN0aW5nLnBzeWFpLmNvbSIsImp0aSI6ImFkbWluL2E4MDQ0Yjc0LWQzMGQtNDU2Ny1hYzNlLTI0MTFjZjdmNzYwMSIsIm5hbWUiOiJlN2FiN2FhOS02MGFiLTQxNzAtOWM2YS04OTEwZDkxZGYwMGQiLCJuYmYiOjE3MzI3NjUwMDMsIm5vbmNlIjoiIiwib3duZXIiOiJwc3lhaSIsInBob25lIjoiMTg3NjU0NTQ3NjIiLCJzY29wZSI6IiIsInN1YiI6ImU3YWI3YWE5LTYwYWItNDE3MC05YzZhLTg5MTBkOTFkZjAwZCIsInRhZyI6IiIsInRva2VuVHlwZSI6ImFjY2Vzcy10b2tlbiJ9.cGWEaooPkGZlGAn5d4v4XP2o0K02cc7cianbNQwqebs2Q9cYA4W1kzgbu546F7bEj4-d9hc1hcKdf7fdbfEgxodhubsVU5twJaXzrsJtOKnOJh5siuIgOTw7ynlQRAeFxMod_lJyJTRRj41-m02n3c4onXG2u6R7onS26UqfB3xWTWjqhNEbHaDAHchjXuPSa6V3MbeukpxPkHIzZ-b4RlA7Tino2YCuf9gje6XU1aSqp_BeucLEn_umHi61Ex-KbtPjcy-OEYNonbNm98yNsgozwISs5AVCcqasI-NhatcrEqgw8XabPGUMkyp_0dySIQ6PV_W4PCLWKzg1IkWjBmTdXOXoNxWyedqDDmAxIvfJVeBdbqWnPOTAmQiLb_wjhtaZk4rrvah9s3cofk49YXE-cph2m2a1LJR5S2AQ2cANDMCfBalNlb369qb0DG4FVsR6GPlm3IYN8ZUVy3J2I6gUvFksk1sQhkFt9s3E6leqPLkjvLjG4MbNTRMCwDqhTWg7sSUzjYDnnEuREPvaNPIJ-c5j2yiO8DsXVX6X537FjHBYn2l0MXbss-Xn0ksV4fAax2Y4JDTsxmoZAjemS9-5YCmXgTbz5I0HHoTpcrHKDMZpJpTY5KrlaH7yozLvU0xvH1zGr7ilfgXXazeavIVRXJ9cLwkg1dQUW1vcd60",
+                // authToken:"Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImNlcnQtYnVpbHQtaW4iLCJ0eXAiOiJKV1QifQ.eyJhdWQiOlsiODQ3OTY4MWZlYWFmYjc5NDNjZDgiXSwiZXhwIjoxNzI1NDMzMDgwLCJpYXQiOjE3MjQ4MjgyODAsImlkIjoiMTA4OTk3YjAtZmMwYi00NzVhLTk1OTMtZjUwMGNmODQzMzE3IiwiaXNzIjoiaHR0cHM6Ly9hdXRoLnBzeWFpLm5ldCIsImp0aSI6ImFkbWluLzM4ZWUyODgxLTg2NTItNGJjMi1hNGQ2LTliZTY3NTNlZDU2MCIsIm5hbWUiOiIxNTMxMzcyMDY3NiIsIm5iZiI6MTcyNDgyODI4MCwibm9uY2UiOiIiLCJvd25lciI6InBzeWFpIiwic2NvcGUiOiIiLCJzdWIiOiIxMDg5OTdiMC1mYzBiLTQ3NWEtOTU5My1mNTAwY2Y4NDMzMTciLCJ0YWciOiJzdGFmZiIsInRva2VuVHlwZSI6ImFjY2Vzcy10b2tlbiJ9.XuEVsj-Ly6xfmFhseZiJcI_zcMDRfC_dFYS-hRhfZSgaruMOuhkIx-LpyNyqy7Q1keeBJiFBctJxMFxRlBQA2io_rzIrVWQHinQ64c5ZY6U_O3qEgSMkIyX2BKIEDL1zup68PsJQdw7sCdHBJ8pdDIz_ZZG02k42U-0XLNZDvlVQihn41Lpn2L1rGquREWJlxUR2udAD88upyxcRA6L7VWbxhQlkwQjLVIdwF8Y2xyTd5TRkeoY_7XA91PLr2WgrMS7IaqZm3bk-sma2wB6m7xTrUx64yPVj7gnK8wshLVqLg-PyLafXfs2cw9y93gqFD7AEV9Th9XNDqyYDkyONJrLsOuVNpHurG9iQe5RJMgrmC5-kfLLCc8IpZAYQofiMtFgkpdCdr7N2X5YakuxD2oviSCNRsb88czyvKzMev7xWFVcftqh2mbSQTjzONIWsu2sduInbOJe1waPnBrsJVa2TwFIk4NSoQw1PYhPvTxWI58hC27nqoVOF2f0vrPL0cHCXsg7eH7HecQdBUvTJX39AjZuk9EsK9jmEFoQL_GZIKffx5seX6VG3s8zpXEKTlR7pm_yXeiw4LVPEyw-hgcp2kScG1eG98PcZzuYR7XYcPWXNwrm63biUnsWsrsYbB3rPCsmy1GLhICx0oYLSx1bzipds1LDRfZCvfG4WTtc",
+                ssmlInfo: {
+                    speed: 1.25,
+                    // text: "你好，朝阳测试一下6688123哈哈哈",
+                    text: '你好，测试测<div class="editorTags pauseEnum"><pre><br></pre><div class="optionBtn editorTagsOption readonly" contenteditable="false" data-optionbtn="optionBtn"><strong>2秒</strong><div class="editorTagsOptionBox"><div class="editorList" data-index="0" data-type="pauseEnum" data-desc="0.25秒" data-val="250ms">\n              <p><br></p>\n              <span>0.25秒</span>\n            </div><div class="editorList" data-index="1" data-type="pauseEnum" data-desc="0.5秒" data-val="500ms">\n              <p><br></p>\n              <span>0.5秒</span>\n            </div><div class="editorList" data-index="2" data-type="pauseEnum" data-desc="1秒" data-val="1000ms">\n              <p><br></p>\n              <span>1秒</span>\n            </div><div class="editorList" data-index="3" data-type="pauseEnum" data-desc="2秒" data-val="2000ms">\n              <p class="active"><br></p>\n              <span>2秒</span>\n            </div><div class="editorList" data-index="-1">\n        <p><br></p>\n        <span>移除</span>\n      </div></div></div><pre><br></pre></div>试测<div class="editorTags pinyin"><pre><br></pre><span class="border valText" data-type="pinyin" data-mark="undefined" data-desc="cháo" data-val="cháo" data-numval="cha2o">朝</span><div class="optionBtn editorTagsOption readonly" contenteditable="false" data-optionbtn="optionBtn"><strong>cháo</strong><div class="editorTagsOptionBox"><div class="editorList" data-index="0" data-type="pinyin" data-desc="cháo" data-val="cháo">\n              <p class="active"><br></p>\n              <span>cháo</span>\n            </div><div class="editorList" data-index="1" data-type="pinyin" data-desc="zhāo" data-val="zhāo">\n              <p class="active"><br></p>\n              <span>zhāo</span>\n            </div><div class="editorList" data-index="2" data-type="pinyin" data-desc="zhū" data-val="zhū">\n              <p class="active"><br></p>\n              <span>zhū</span>\n            </div><div class="editorList" data-index="-1">\n        <p><br></p>\n        <span>移除</span>\n      </div></div></div><pre><br></pre></div>阳<div class="editorTags speechSpeedEnum"><pre><br></pre><pre><br></pre><em>[</em><pre><br></pre><span class="valText" data-type="speechSpeedEnum" data-mark="speech_speed_15" data-desc="1.5倍" data-val="1.5">试测试测</span><pre><br></pre><em>]</em><pre><br></pre><div class="optionBtn editorTagsOption readonly" contenteditable="false" data-optionbtn="optionBtn"><strong>1.5倍</strong><div class="editorTagsOptionBox"><div class="editorList" data-index="0" data-type="speechSpeedEnum" data-desc="0.5倍" data-val="0.5">\n              <p><br></p>\n              <span>0.5倍</span>\n            </div><div class="editorList" data-index="1" data-type="speechSpeedEnum" data-desc="0.6倍" data-val="0.6">\n              <p><br></p>\n              <span>0.6倍</span>\n            </div><div class="editorList" data-index="2" data-type="speechSpeedEnum" data-desc="0.7倍" data-val="0.7">\n              <p><br></p>\n              <span>0.7倍</span>\n            </div><div class="editorList" data-index="3" data-type="speechSpeedEnum" data-desc="0.8倍" data-val="0.8">\n              <p><br></p>\n              <span>0.8倍</span>\n            </div><div class="editorList" data-index="4" data-type="speechSpeedEnum" data-desc="0.9倍" data-val="0.9">\n              <p><br></p>\n              <span>0.9倍</span>\n            </div><div class="editorList" data-index="5" data-type="speechSpeedEnum" data-desc="1倍" data-val="1">\n              <p><br></p>\n              <span>1倍</span>\n            </div><div class="editorList" data-index="6" data-type="speechSpeedEnum" data-desc="1.1倍" data-val="1.1">\n              <p><br></p>\n              <span>1.1倍</span>\n            </div><div class="editorList" data-index="7" data-type="speechSpeedEnum" data-desc="1.2倍" data-val="1.2">\n              <p><br></p>\n              <span>1.2倍</span>\n            </div><div class="editorList" data-index="8" data-type="speechSpeedEnum" data-desc="1.3倍" data-val="1.3">\n              <p><br></p>\n              <span>1.3倍</span>\n            </div><div class="editorList" data-index="9" data-type="speechSpeedEnum" data-desc="1.4倍" data-val="1.4">\n              <p><br></p>\n              <span>1.4倍</span>\n            </div><div class="editorList" data-index="10" data-type="speechSpeedEnum" data-desc="1.5倍" data-val="1.5">\n              <p class="active"><br></p>\n              <span>1.5倍</span>\n            </div><div class="editorList" data-index="-1">\n        <p><br></p>\n        <span>移除</span>\n      </div></div></div><pre><br></pre></div><div class="editorTags continuous"><pre><br></pre><span class="border valText" data-type="continuous" data-mark="undefined" data-desc="连续词语" data-val="continuous" data-numval="undefined">试测6</span><div class="optionBtn editorTagsOption readonly" contenteditable="false" data-optionbtn="optionBtn"><strong>连续词语</strong><div class="editorTagsOptionBox"><div class="editorList" data-index="-1">\n        <p><br></p>\n        <span>移除</span>\n      </div></div></div><pre><br></pre></div>666<div class="editorTags digitSymbolEnum"><pre><br></pre><pre><br></pre><em>[</em><pre><br></pre><span class="valText" data-type="digitSymbolEnum" data-mark="symbol_name" data-desc="人名" data-val="name">6666888</span><pre><br></pre><em>]</em><pre><br></pre><div class="optionBtn editorTagsOption readonly" contenteditable="false" data-optionbtn="optionBtn"><strong>人名</strong><div class="editorTagsOptionBox"><div class="editorList" data-index="0" data-type="digitSymbolEnum" data-desc="电话（幺三三 幺幺二二 三三四四）" data-val="telephone">\n              <p><br></p>\n              <span>电话（幺三三 幺幺二二 三三四四）</span>\n            </div><div class="editorList" data-index="1" data-type="digitSymbolEnum" data-desc="序列（一三三一一二二三三四四）" data-val="number_digit">\n              <p><br></p>\n              <span>序列（一三三一一二二三三四四）</span>\n            </div><div class="editorList" data-index="2" data-type="digitSymbolEnum" data-desc="地址" data-val="address">\n              <p><br></p>\n              <span>地址</span>\n            </div><div class="editorList" data-index="3" data-type="digitSymbolEnum" data-desc="人名" data-val="name">\n              <p class="active"><br></p>\n              <span>人名</span>\n            </div><div class="editorList" data-index="-1">\n        <p><br></p>\n        <span>移除</span>\n      </div></div></div><pre><br></pre></div>88888试<div class="editorTags volumeEnum"><pre><br></pre><pre><br></pre><em>[</em><pre><br></pre><span class="valText" data-type="volumeEnum" data-mark="volume_pos_50" data-desc="1.5倍" data-val="+50%">测试测</span><pre><br></pre><em>]</em><pre><br></pre><div class="optionBtn editorTagsOption readonly" contenteditable="false" data-optionbtn="optionBtn"><strong>1.5倍</strong><div class="editorTagsOptionBox"><div class="editorList" data-index="0" data-type="volumeEnum" data-desc="0.5倍" data-val="-50%">\n              <p><br></p>\n              <span>0.5倍</span>\n            </div><div class="editorList" data-index="1" data-type="volumeEnum" data-desc="0.75倍" data-val="-25%">\n              <p><br></p>\n              <span>0.75倍</span>\n            </div><div class="editorList" data-index="2" data-type="volumeEnum" data-desc="1.25倍" data-val="+25%">\n              <p><br></p>\n              <span>1.25倍</span>\n            </div><div class="editorList" data-index="3" data-type="volumeEnum" data-desc="1.5倍" data-val="+50%">\n              <p class="active"><br></p>\n              <span>1.5倍</span>\n            </div><div class="editorList" data-index="-1">\n        <p><br></p>\n        <span>移除</span>\n      </div></div></div><pre><br></pre></div>试测试测<div class="editorTags toneEnum"><pre><br></pre><pre><br></pre><em>[</em><pre><br></pre><span class="valText" data-type="toneEnum" data-mark="tone_high" data-desc="高" data-val="high">试测试测试</span><pre><br></pre><em>]</em><pre><br></pre><div class="optionBtn editorTagsOption readonly" contenteditable="false" data-optionbtn="optionBtn"><strong>高</strong><div class="editorTagsOptionBox"><div class="editorList" data-index="0" data-type="toneEnum" data-desc="高" data-val="high">\n              <p class="active"><br></p>\n              <span>高</span>\n            </div><div class="editorList" data-index="1" data-type="toneEnum" data-desc="中" data-val="medium">\n              <p><br></p>\n              <span>中</span>\n            </div><div class="editorList" data-index="2" data-type="toneEnum" data-desc="低" data-val="low">\n              <p><br></p>\n              <span>低</span>\n            </div><div class="editorList" data-index="-1">\n        <p><br></p>\n        <span>移除</span>\n      </div></div></div><pre><br></pre></div>测试测试测试测试测试测试测试测试测试',
+                    ssmlText: "",
+                    psyaiLangReplace: "PsyaiLangID",
+                    psyaiVoiceReplace: "PsyaiVoiceID",
+                    virtualmanKey: "10392", // 微软
+                    // virtualmanKey: "10722", // moyin
+                    // virtualmanKey: "10717", // 粤语
+                    // virtualmanKey: "10882", // fishaudio
+                    virtualmanKey: "10786", // minimax
+                    emotionValue: "advertisement_upbeat",
+                    emotionText: "兴奋",
+                },
+            })
+            );
+            ue.interface.initData();
+        }, 1000)
     }
-  </script>
+
+</script>
+
 </html>
