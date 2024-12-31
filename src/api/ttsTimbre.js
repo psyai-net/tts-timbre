@@ -54,7 +54,7 @@ function getSessions(key) {
 async function timbreEnum(form) {
   let url = newPsyaiEditorUrl + 'audio/timbre/enum' + '?classify=tts_country';
   // let url = newPsyaiEditorUrl+'audio/timbre/enum'+'?classify=zh-CN';
-  // console.log(url);
+  console.log(url);
   return newCheckResult(await axios.get(url,
     {
       withCredentials: false,
@@ -96,7 +96,7 @@ async function getList(form, obj) {
 // }
 
 async function getListCollect(form) {
-  let url = newPsyaiEditorUrl + 'audio/timbre/collect/list' + '?sex=male';
+  let url = newPsyaiEditorUrl + 'audio/timbre/collect/list' + `?sex=${virtualmanGender}`;
   // console.log(url);
   return newCheckResult(await axios.get(url,
     {
